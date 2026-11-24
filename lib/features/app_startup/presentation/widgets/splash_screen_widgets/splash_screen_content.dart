@@ -44,7 +44,7 @@ class _SplashScreenContentState extends State<SplashScreenContent>
             () {
               if (context.mounted) {
                 Navigator.of(context)
-                    .pushNamed(RouteNames.mainNavigationScreen);
+                    .pushReplacementNamed(RouteNames.mainNavigationScreen);
               }
             },
           );

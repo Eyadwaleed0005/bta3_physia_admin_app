@@ -36,10 +36,10 @@ class CustomBottomNavBar extends StatelessWidget {
 
   static List<BottomNavItemData> get items => [
     BottomNavItemData(label: "الرئيسية", iconPath: AppImage().home),
-    BottomNavItemData(label: "الكورسات", iconPath: AppImage().book),
-    BottomNavItemData(label: 'البث', iconPath: AppImage().live),
-    BottomNavItemData(label: 'النتائج', iconPath: AppImage().chart),
-    BottomNavItemData(label: 'حسابي', iconPath: AppImage().user),
+    BottomNavItemData(label: "الطلاب", iconPath: AppImage().users),
+    BottomNavItemData(label: 'الكورسات', iconPath: AppImage().book),
+    BottomNavItemData(label: 'الامتحانات', iconPath: AppImage().exam),
+    BottomNavItemData(label: 'المزيد', iconPath: AppImage().more),
   ];
 
   @override
@@ -62,8 +62,8 @@ class CustomBottomNavBar extends StatelessWidget {
 
     final barHeight = _barHeight.h;
 
-    final rectangleSize = 55.w;
-    final rectangleTopOffset = -14.h;
+    final rectangleSize = 35.w;
+    final rectangleTopOffset = 8.h;
 
     return SafeArea(
       top: false,
@@ -85,7 +85,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 final itemCenter =
                     totalWidth -
                     _barSidePadding.w -
-                    itemWidth / 2 -
+                    itemWidth / 1.65 -
                     index * itemWidth;
                 return itemCenter - rectangleSize / 2;
               }
@@ -224,10 +224,10 @@ class _SelectedRectangleIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size,
+      width: size * 1.4,
       height: size,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(14.r),
         color: ColorPalette.accent,
       ),
       child: Center(

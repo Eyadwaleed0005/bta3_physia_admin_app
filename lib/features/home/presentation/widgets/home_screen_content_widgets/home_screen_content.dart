@@ -5,6 +5,8 @@ class HomeScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Home Screen'));
+    return Center(
+      child: Text('Home Screen', style: TextStyle(color: Colors.white)),
+    );
   }
 }

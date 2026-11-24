@@ -20,27 +20,15 @@ class AppImage {
   late final String surgeBottom = '${baseImages}surge_bottom.svg';
   late final String surgeLeft = '${baseImages}surge_left.svg';
   late final String courseBanner = '${baseImages}course_banner.png';
-  late final String avatar1 = '${baseImages}avatar_1.svg';
-  late final String avatar2 = '${baseImages}avatar_2.svg';
-  late final String avatar3 = '${baseImages}avatar_3.svg';
 
   // ===== icons =====
-  late final String rocketIcon = '${baseIcons}Rocket.svg';
-  late final String arrowBack = '${baseIcons}arrow_back.svg';
+
   late final String home = '${baseIcons}home.svg';
-  late final String live = '${baseIcons}live.svg';
+  late final String exam = '${baseIcons}exam.svg';
   late final String book = '${baseIcons}book.svg';
-  late final String chart = '${baseIcons}chart.svg';
-  late final String blueChart = '${baseIcons}chart_blue.svg';
-  late final String user = '${baseIcons}user.svg';
-  late final String blueLive = '${baseIcons}live_blue.svg';
-  late final String category = '${baseIcons}category.svg';
+  late final String more = '${baseIcons}more.svg';
+  late final String users = '${baseIcons}users.svg';
   late final String blueBook = '${baseIcons}book_blue.svg';
-  late final String blueExam = '${baseIcons}exam_blue.svg';
-  late final String emptyBookOpen = '${baseIcons}empty_book_open.svg';
-  late final String graduation = '${baseIcons}graduation.svg';
-  late final String liveEmpty = '${baseIcons}live_empty.svg';
-  late final String warning = '${baseIcons}warning.svg';
 
   // ===== animations =====
   late final String splash = '${baseAnimations}splash.json';
