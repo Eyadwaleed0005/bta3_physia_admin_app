@@ -14,8 +14,8 @@ abstract final class HomeRoutes {
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => BlocProvider<HomeCubit>(
-            create: (context) => getIt<HomeCubit>(),
-            child: HomeScreen(),
+            create: (context) => getIt<HomeCubit>()..load(),
+            child: const HomeScreen(),
           ),
         );
 

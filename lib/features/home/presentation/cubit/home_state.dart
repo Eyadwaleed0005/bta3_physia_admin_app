@@ -1,37 +1,41 @@
 import 'package:equatable/equatable.dart';
 
-enum HomeViewMode {
-  contentWithLive,
-  contentNoLive,
-  emptyGrade,
-  failure,
-  loading,
-}
+import '../../data/models/dashboard_overview_model.dart';
+
+enum HomeStatus { loading, success, empty, failure }
 
 class HomeState extends Equatable {
   const HomeState({
-    this.viewMode = HomeViewMode.contentWithLive,
-    this.userName = 'أحمد محمد',
-    this.unreadNotificationsCount = 2,
+    this.status = HomeStatus.loading,
+    this.overview,
+    this.isRefreshing = false,
+    this.errorMessage,
   });
 
-  final HomeViewMode viewMode;
-  final String userName;
-  final int unreadNotificationsCount;
+  final HomeStatus status;
+  final DashboardOverviewModel? overview;
+  final bool isRefreshing;
+  final String? errorMessage;
+
+  bool get hasOverview => overview != null;
+
+  bool get isFailureVisible => errorMessage != null;
 
   HomeState copyWith({
-    HomeViewMode? viewMode,
-    String? userName,
-    int? unreadNotificationsCount,
+    HomeStatus? status,
+    DashboardOverviewModel? overview,
+    bool? isRefreshing,
+    String? errorMessage,
+    bool clearError = false,
   }) {
     return HomeState(
-      viewMode: viewMode ?? this.viewMode,
-      userName: userName ?? this.userName,
-      unreadNotificationsCount:
-          unreadNotificationsCount ?? this.unreadNotificationsCount,
+      status: status ?? this.status,
+      overview: overview ?? this.overview,
+      isRefreshing: isRefreshing ?? this.isRefreshing,
+      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
     );
   }
 
   @override
-  List<Object?> get props => [viewMode, userName, unreadNotificationsCount];
+  List<Object?> get props => [status, overview, isRefreshing, errorMessage];
 }

@@ -19,6 +19,15 @@ class AppTextStyle {
     );
   }
 
+  static TextStyle font28textLightBoldTajawal() {
+    return TextStyle(
+      fontSize: 28.sp,
+      fontWeight: FontWeightHelper.bold,
+      fontFamily: tajawal,
+      color: ColorPalette.textLight,
+    );
+  }
+
   static TextStyle font13Wine200RegularTajawal() {
     return TextStyle(
       fontSize: 13.sp,

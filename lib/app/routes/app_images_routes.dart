@@ -28,6 +28,8 @@ class AppImage {
   late final String book = '${baseIcons}book.svg';
   late final String more = '${baseIcons}more.svg';
   late final String users = '${baseIcons}users.svg';
+  late final String blueUsers = '${baseIcons}users_blue.svg';
+
   late final String blueBook = '${baseIcons}book_blue.svg';
 
   // ===== animations =====

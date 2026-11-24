@@ -64,7 +64,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     switch (currentIndex) {
       case MainNavigationTabs.home:
         return BlocProvider(
-          create: (context) => getIt<HomeCubit>(),
+          create: (context) => getIt<HomeCubit>()..load(),
           child: const HomeScreen(),
         );
 

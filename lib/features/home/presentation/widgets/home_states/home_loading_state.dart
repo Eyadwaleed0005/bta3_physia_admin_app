@@ -1,5 +1,6 @@
 import 'package:bta3_physia_admin/core/helper/spacer.dart';
 import 'package:bta3_physia_admin/core/style/app_color.dart';
+import 'package:bta3_physia_admin/core/widgets/app_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -9,83 +10,59 @@ class HomeLoadingState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final baseColor = ColorPalette.fieldFill;
-    final highlightColor = ColorPalette.teal400;
-
-    return Shimmer.fromColors(
-      baseColor: baseColor,
-      highlightColor: highlightColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            height: 92.h,
-            decoration: BoxDecoration(
-              color: baseColor,
-              borderRadius: BorderRadius.circular(16.r),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        verticalSpace(6),
+        const Center(
+          child: AppLoadingIndicator(
+            color: ColorPalette.teal200,
+            size: 18,
+            title: 'جارٍ تحميل البيانات...',
           ),
-
-          verticalSpace(16),
-
-          Row(
+        ),
+        verticalSpace(24),
+        Shimmer.fromColors(
+          baseColor: ColorPalette.fieldFill,
+          highlightColor: ColorPalette.teal400,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                child: Container(
-                  height: 78.h,
-                  decoration: BoxDecoration(
-                    color: baseColor,
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                ),
+              const _SkeletonBox(height: 112, radius: 24),
+              verticalSpace(22),
+              const Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: _SkeletonBox(width: 170, height: 18),
               ),
-              horizontalSpace(12),
-              Expanded(
-                child: Container(
-                  height: 78.h,
-                  decoration: BoxDecoration(
-                    color: baseColor,
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                ),
-              ),
-              horizontalSpace(12),
-              Expanded(
-                child: Container(
-                  height: 78.h,
-                  decoration: BoxDecoration(
-                    color: baseColor,
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                ),
-              ),
+              verticalSpace(14),
+              const _SkeletonBox(height: 132, radius: 24),
+              verticalSpace(14),
+              const _SkeletonBox(height: 132, radius: 24),
             ],
           ),
+        ),
+      ],
+    );
+  }
+}
 
-          verticalSpace(20),
+class _SkeletonBox extends StatelessWidget {
+  const _SkeletonBox({this.width, required this.height, this.radius = 12});
 
-          Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              width: 140.w,
-              height: 22.h,
-              decoration: BoxDecoration(
-                color: baseColor,
-                borderRadius: BorderRadius.circular(6.r),
-              ),
-            ),
-          ),
+  final double? width;
+  final double height;
+  final double radius;
 
-          verticalSpace(14),
-
-          Container(
-            height: 230.h,
-            decoration: BoxDecoration(
-              color: baseColor,
-              borderRadius: BorderRadius.circular(16.r),
-            ),
-          ),
-        ],
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width?.w ?? double.infinity,
+      height: height.h,
+      decoration: BoxDecoration(
+        color: ColorPalette.fieldFill,
+        borderRadius: BorderRadius.circular(radius.r),
       ),
     );
   }
