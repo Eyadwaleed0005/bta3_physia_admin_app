@@ -1,4 +1,5 @@
-/* import 'package:bta3_physia_admin/app/routes/screen_routes/route_names.dart';
+import 'package:bta3_physia_admin/app/routes/screen_routes/route_names.dart';
+import 'package:bta3_physia_admin/features/app_startup/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 abstract final class AppStartupRoutes {
@@ -14,10 +15,8 @@ abstract final class AppStartupRoutes {
           },
         );
 
-
       default:
         return null;
     }
   }
 }
- */
