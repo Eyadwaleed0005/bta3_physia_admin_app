@@ -1,0 +1,36 @@
+import 'package:bta3_physia_admin/core/style/app_color.dart';
+import 'package:bta3_physia_admin/core/style/textstyles.dart';
+import 'package:bta3_physia_admin/core/widgets/custom_button.dart';
+import 'package:bta3_physia_admin/features/students/presentation/widgets/students_list_widgets/students_notice_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class StudentsFailureState extends StatelessWidget {
+  const StudentsFailureState({
+    super.key,
+    required this.message,
+    required this.onRetry,
+    this.title = 'تعذّر تحميل الطلاب',
+  });
+
+  final String title;
+  final String message;
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    return StudentsNoticeCard(
+      title: title,
+      message: message,
+      footer: CustomButton(
+        text: 'إعادة المحاولة',
+        onPressed: onRetry,
+        height: 48.h,
+        background: ColorPalette.accent,
+        foreground: ColorPalette.textPrimary,
+        borderRadius: 24.r,
+        textStyle: AppTextStyle.font14TextPrimaryBoldTajawal(),
+      ),
+    );
+  }
+}

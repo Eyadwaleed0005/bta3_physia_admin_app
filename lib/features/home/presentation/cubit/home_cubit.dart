@@ -15,24 +15,29 @@ class HomeCubit extends Cubit<HomeState> {
     final Either<AppErrorModel, DashboardOverviewModel> result =
         await DummyDashboardData.load();
 
-    result.fold(
-      (error) => emit(
-        state.copyWith(
-          status: HomeStatus.failure,
-          isRefreshing: false,
-          errorMessage: error.message,
-        ),
-      ),
-      (overview) => emit(
-        HomeState(
-          status: overview.hasDisplayData
-              ? HomeStatus.success
-              : HomeStatus.empty,
-          overview: overview,
-          isRefreshing: false,
-        ),
-      ),
-    );
+    emit(state.copyWith(status: HomeStatus.loading));
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      if (!isClosed) {
+        result.fold(
+          (error) => emit(
+            state.copyWith(
+              status: HomeStatus.failure,
+              isRefreshing: false,
+              errorMessage: error.message,
+            ),
+          ),
+          (overview) => emit(
+            HomeState(
+              status: overview.hasDisplayData
+                  ? HomeStatus.success
+                  : HomeStatus.empty,
+              overview: overview,
+              isRefreshing: false,
+            ),
+          ),
+        );
+      }
+    });
   }
 
   void refresh() {

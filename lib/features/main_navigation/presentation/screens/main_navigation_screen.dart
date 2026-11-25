@@ -4,6 +4,8 @@ import 'package:bta3_physia_admin/features/home/presentation/cubit/home_cubit.da
 import 'package:bta3_physia_admin/features/home/presentation/screens/home_screen.dart';
 import 'package:bta3_physia_admin/features/main_navigation/presentation/cubit/bottom_navigation_cubit.dart';
 import 'package:bta3_physia_admin/features/main_navigation/presentation/widgets/custom_bottom_nav_bar.dart';
+import 'package:bta3_physia_admin/features/students/presentation/cubit/students_cubit.dart';
+import 'package:bta3_physia_admin/features/students/presentation/screens/students_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -68,10 +70,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           child: const HomeScreen(),
         );
 
-      case MainNavigationTabs.courses:
+      case MainNavigationTabs.students:
         return BlocProvider(
-          create: (context) => getIt<HomeCubit>(),
-          child: const HomeScreen(),
+          create: (context) => getIt<StudentsCubit>()..load(),
+          child: const StudentsScreen(),
         );
 
       case MainNavigationTabs.live:
@@ -104,7 +106,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     switch (currentIndex) {
       case MainNavigationTabs.home:
         return 'screen_$currentIndex';
-      case MainNavigationTabs.courses:
+      case MainNavigationTabs.students:
         return 'screen_$currentIndex';
       case MainNavigationTabs.live:
         return 'screen_$currentIndex';

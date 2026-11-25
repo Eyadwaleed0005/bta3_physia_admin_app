@@ -1,0 +1,14 @@
+import 'package:bta3_physia_admin/features/students/presentation/widgets/students_list_widgets/students_list_view.dart';
+import 'package:flutter/material.dart';
+
+class StudentsScreenContent extends StatelessWidget {
+  const StudentsScreenContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Directionality(
+      textDirection: TextDirection.rtl,
+      child: StudentsListView(),
+    );
+  }
+}

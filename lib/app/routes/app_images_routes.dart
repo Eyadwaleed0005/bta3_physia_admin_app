@@ -20,6 +20,7 @@ class AppImage {
   late final String surgeBottom = '${baseImages}surge_bottom.svg';
   late final String surgeLeft = '${baseImages}surge_left.svg';
   late final String courseBanner = '${baseImages}course_banner.png';
+  late final String avatar = '${baseImages}avatar_1.svg';
 
   // ===== icons =====
 
