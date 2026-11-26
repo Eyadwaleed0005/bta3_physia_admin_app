@@ -1,12 +1,12 @@
 import 'package:bta3_physia_admin/core/helper/spacer.dart';
 import 'package:bta3_physia_admin/core/style/app_color.dart';
 import 'package:bta3_physia_admin/core/widgets/app_loading_indicator.dart';
+import 'package:bta3_physia_admin/core/widgets/app_notice_card.dart';
+import 'package:bta3_physia_admin/core/widgets/custom_screen_header.dart';
 import 'package:bta3_physia_admin/features/students/data/models/student_model.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/student_details_cubit.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/student_details_state.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_details_widgets/student_profile_card.dart';
-import 'package:bta3_physia_admin/features/students/presentation/widgets/students_header.dart';
-import 'package:bta3_physia_admin/features/students/presentation/widgets/students_list_widgets/students_notice_card.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_results_widgets/student_result_card.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_states/students_failure_state.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class StudentsResultsScreenContent extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-              child: StudentsHeader(
+              child: CustomScreenHeader(
                 title: 'سجل النتائج',
                 subtitle: 'نتائج امتحانات الصف الحالي',
                 onBack: () => Navigator.of(context).pop(),
@@ -92,16 +92,22 @@ class _ResultsStateBody extends StatelessWidget {
             StudentProfileCard(student: student),
             verticalSpace(16),
             if (student.results.isEmpty)
-              const StudentsNoticeCard(
+              const AppNoticeCard(
                 title: 'لا توجد نتائج مسجلة',
                 message:
                     'ستظهر نتائج امتحانات الطالب هنا بعد إتمام أول امتحان.',
               )
             else
-              for (final StudentExamResultModel result in student.results) ...[
-                StudentResultCard(result: result),
-                verticalSpace(12),
-              ],
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                itemCount: student.results.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    StudentResultCard(result: student.results[index]),
+                separatorBuilder: (BuildContext context, int index) =>
+                    verticalSpace(12),
+              ),
           ],
         );
     }

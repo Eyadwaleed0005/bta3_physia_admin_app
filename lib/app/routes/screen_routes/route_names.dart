@@ -8,4 +8,6 @@ abstract final class RouteNames {
   static const String studentCoursesScreen = '/studentCoursesScreen';
   static const String studentResultsScreen = '/studentResultsScreen';
   static const String studentsGradeFilterScreen = '/studentsGradeFilterScreen';
+  static const String gradesScreen = '/gradesScreen';
+  static const String gradeFormScreen = '/gradeFormScreen';
 }

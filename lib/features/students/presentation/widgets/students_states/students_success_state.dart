@@ -3,7 +3,6 @@ import 'package:bta3_physia_admin/core/style/app_color.dart';
 import 'package:bta3_physia_admin/core/style/textstyles.dart';
 import 'package:bta3_physia_admin/core/widgets/custom_button.dart';
 import 'package:bta3_physia_admin/core/widgets/custom_secondary_button.dart';
-import 'package:bta3_physia_admin/features/students/data/models/student_model.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/students_state.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_list_widgets/student_card.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_list_widgets/students_roster_note.dart';
@@ -30,10 +29,18 @@ class StudentsSuccessState extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        for (final StudentModel student in state.visibleStudents) ...[
-          StudentCard(student: student, onTap: () => onOpenStudent(student.id)),
-          verticalSpace(12),
-        ],
+        ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) => StudentCard(
+            student: state.visibleStudents[index],
+            onTap: () => onOpenStudent(state.visibleStudents[index].id),
+          ),
+          separatorBuilder: (context, index) => verticalSpace(12),
+          itemCount: state.visibleStudents.length,
+        ),
+        verticalSpace(12),
         if (state.hasSearch) ...[
           CustomSecondaryButton(
             text: 'مسح البحث',

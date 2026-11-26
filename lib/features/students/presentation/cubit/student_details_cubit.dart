@@ -1,4 +1,5 @@
 import 'package:bta3_physia_admin/core/errors/error_model/app_error_model.dart';
+import 'package:bta3_physia_admin/features/grades/data/models/dummy_grades_data.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,6 +37,7 @@ class StudentDetailsCubit extends Cubit<StudentDetailsState> {
         state.copyWith(
           status: StudentDetailsStatus.success,
           student: student,
+          availableGrades: DummyGradesData.activeGrades,
           clearError: true,
         ),
       ),
@@ -50,12 +52,12 @@ class StudentDetailsCubit extends Cubit<StudentDetailsState> {
     await load(studentId);
   }
 
-  void changeGrade(StudentGrade grade) {
+  void changeGrade(String gradeId) {
     final StudentModel? student = state.student;
 
     if (student == null) return;
 
-    _updateStudent(student.copyWith(grade: grade));
+    _updateStudent(student.copyWith(gradeId: gradeId));
   }
 
   void toggleAccountStatus() {

@@ -1,7 +1,7 @@
 import 'package:bta3_physia_admin/core/style/app_color.dart';
 import 'package:bta3_physia_admin/core/style/textstyles.dart';
+import 'package:bta3_physia_admin/core/widgets/app_notice_card.dart';
 import 'package:bta3_physia_admin/core/widgets/custom_button.dart';
-import 'package:bta3_physia_admin/features/students/presentation/widgets/students_list_widgets/students_notice_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +19,7 @@ class StudentsFailureState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StudentsNoticeCard(
+    return AppNoticeCard(
       title: title,
       message: message,
       footer: CustomButton(

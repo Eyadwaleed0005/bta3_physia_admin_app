@@ -28,8 +28,6 @@ abstract final class DummyStudentsData {
     isRetryable: false,
   );
 
-  /// In-memory roster shared by the list and details cubits so edits survive
-  /// navigation until the real data source replaces this file.
   static List<StudentModel>? _rosterCache;
 
   static List<StudentModel> get _roster => _rosterCache ??= _buildStudents();
@@ -94,7 +92,7 @@ abstract final class DummyStudentsData {
         id: 'student_1',
         name: 'نور أحمد',
         email: 'nour@example.com',
-        grade: StudentGrade.thirdSecondary,
+        gradeId: 'secondary_3',
         courses: <StudentCourseModel>[
           StudentCourseModel(
             id: 'course_1',
@@ -125,7 +123,7 @@ abstract final class DummyStudentsData {
         id: 'student_2',
         name: 'ياسين أحمد',
         email: 'yassin@example.com',
-        grade: StudentGrade.secondSecondary,
+        gradeId: 'secondary_2',
         courses: <StudentCourseModel>[
           StudentCourseModel(
             id: 'course_3',
@@ -145,7 +143,7 @@ abstract final class DummyStudentsData {
         id: 'student_3',
         name: 'مريم أحمد',
         email: 'mariam@example.com',
-        grade: StudentGrade.firstSecondary,
+        gradeId: 'secondary_1',
         courses: <StudentCourseModel>[
           StudentCourseModel(
             id: 'course_4',
@@ -158,33 +156,33 @@ abstract final class DummyStudentsData {
         id: 'student_4',
         name: 'عمر خالد',
         email: 'omar@example.com',
-        grade: StudentGrade.thirdSecondary,
+        gradeId: 'secondary_3',
       ),
       StudentModel(
         id: 'student_5',
         name: 'سلمى محمود',
         email: 'salma@example.com',
-        grade: StudentGrade.secondSecondary,
+        gradeId: 'secondary_2',
         isActive: false,
       ),
       StudentModel(
         id: 'student_6',
         name: 'آدم يوسف',
         email: 'adam@example.com',
-        grade: StudentGrade.firstSecondary,
+        gradeId: 'secondary_1',
       ),
       StudentModel(
         id: 'student_7',
         name: 'لينا طارق',
         email: 'lina@example.com',
-        grade: StudentGrade.thirdSecondary,
+        gradeId: 'secondary_3',
         isLoginLinked: false,
       ),
       StudentModel(
         id: 'student_8',
         name: 'زياد حسن',
         email: 'ziad@example.com',
-        grade: StudentGrade.secondSecondary,
+        gradeId: 'secondary_2',
       ),
     ];
   }

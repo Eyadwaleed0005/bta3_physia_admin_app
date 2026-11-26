@@ -45,7 +45,7 @@ class StudentCard extends StatelessWidget {
                       student.email,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextStyle.font12TextMutedRegularTajawal(),
+                      style: AppTextStyle.font13TextMutedRegularTajawal(),
                     ),
                     verticalSpace(10),
                     Row(
@@ -53,7 +53,7 @@ class StudentCard extends StatelessWidget {
                         Text(
                           student.statusLabel,
                           maxLines: 1,
-                          style: AppTextStyle.font12TextSecondaryBoldTajawal()
+                          style: AppTextStyle.font13TextSecondaryBoldTajawal()
                               .copyWith(
                                 color: student.isActive
                                     ? ColorPalette.teal200
@@ -67,10 +67,10 @@ class StudentCard extends StatelessWidget {
                         horizontalSpace(12),
                         Flexible(
                           child: Text(
-                            student.grade.label,
+                            student.gradeLabel,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: AppTextStyle.font12TextMutedRegularTajawal(),
+                            style: AppTextStyle.font13TextMutedRegularTajawal(),
                           ),
                         ),
                       ],

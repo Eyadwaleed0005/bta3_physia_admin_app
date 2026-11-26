@@ -1,9 +1,9 @@
 import 'package:bta3_physia_admin/core/style/app_color.dart';
 import 'package:bta3_physia_admin/core/widgets/app_loading_indicator.dart';
+import 'package:bta3_physia_admin/core/widgets/custom_screen_header.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/student_details_cubit.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/student_details_state.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_details_widgets/students_details_body.dart';
-import 'package:bta3_physia_admin/features/students/presentation/widgets/students_header.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_states/students_failure_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +24,7 @@ class StudentsDetailsScreenContent extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-              child: StudentsHeader(
+              child: CustomScreenHeader(
                 title: 'إعدادات الطلاب',
                 subtitle: 'بيانات الحساب والصلاحيات',
                 onBack: () => Navigator.of(context).pop(),

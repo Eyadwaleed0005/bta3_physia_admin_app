@@ -4,13 +4,14 @@ import 'package:bta3_physia_admin/core/style/textstyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class StudentsNoticeCard extends StatelessWidget {
-  const StudentsNoticeCard({
+class AppNoticeCard extends StatelessWidget {
+  const AppNoticeCard({
     super.key,
     required this.title,
     required this.message,
     this.footer,
     this.icon = Icons.info_outline_rounded,
+    this.titleStyle,
     this.showIcon = true,
     this.padding,
   });
@@ -19,6 +20,7 @@ class StudentsNoticeCard extends StatelessWidget {
   final String message;
   final Widget? footer;
   final IconData icon;
+  final TextStyle? titleStyle;
   final bool showIcon;
   final EdgeInsetsGeometry? padding;
 
@@ -43,7 +45,7 @@ class StudentsNoticeCard extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: AppTextStyle.font18TextLightBoldTajawal(),
+            style: titleStyle ?? AppTextStyle.font18TextLightBoldTajawal(),
           ),
           verticalSpace(8),
           ConstrainedBox(

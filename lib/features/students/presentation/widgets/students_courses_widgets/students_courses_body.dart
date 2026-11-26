@@ -3,7 +3,7 @@ import 'package:bta3_physia_admin/core/style/textstyles.dart';
 import 'package:bta3_physia_admin/features/students/data/models/student_model.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_courses_widgets/student_course_card.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_dialogs/students_dialogs.dart';
-import 'package:bta3_physia_admin/features/students/presentation/widgets/students_list_widgets/students_notice_card.dart';
+import 'package:bta3_physia_admin/core/widgets/app_notice_card.dart';
 import 'package:flutter/material.dart';
 
 class StudentsCoursesBody extends StatelessWidget {
@@ -30,26 +30,35 @@ class StudentsCoursesBody extends StatelessWidget {
         ),
         verticalSpace(2),
         Text(
-          student.grade.label,
+          student.gradeLabel,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: AppTextStyle.font12TextMutedRegularTajawal(),
         ),
         verticalSpace(18),
         if (student.courses.isEmpty)
-          const StudentsNoticeCard(
+          const AppNoticeCard(
             title: 'لا توجد كورسات',
             message: 'لم يتم تفعيل أي كورس لهذا الطالب بعد.',
           )
         else
-          for (final StudentCourseModel course in student.courses) ...[
-            StudentCourseCard(
-              course: course,
-              openDialog: () =>
-                  showActivationCourseDialog(context, student, course),
-            ),
-            verticalSpace(14),
-          ],
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            itemCount: student.courses.length,
+            itemBuilder: (BuildContext context, int index) {
+              final StudentCourseModel course = student.courses[index];
+
+              return StudentCourseCard(
+                course: course,
+                openDialog: () =>
+                    showActivationCourseDialog(context, student, course),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                verticalSpace(14),
+          ),
         verticalSpace(4),
         Text(
           'تفعيل الكورس يمنح الطالب الوصول للمحتوى والامتحانات الخاصة به.',

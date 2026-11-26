@@ -1,4 +1,6 @@
 import 'package:bta3_physia_admin/core/errors/error_model/app_error_model.dart';
+import 'package:bta3_physia_admin/features/grades/data/models/dummy_grades_data.dart';
+import 'package:bta3_physia_admin/features/grades/data/models/grade_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,6 +35,7 @@ class StudentsCubit extends Cubit<StudentsState> {
               ? StudentsStatus.empty
               : StudentsStatus.success,
           students: students,
+          availableGrades: DummyGradesData.activeGrades,
         ),
       ),
     );
@@ -71,6 +74,7 @@ class StudentsCubit extends Cubit<StudentsState> {
                 ? StudentsStatus.empty
                 : StudentsStatus.success,
             students: students,
+            availableGrades: DummyGradesData.activeGrades,
             visibleCount: StudentsState.pageSize,
             isRefreshing: false,
             clearError: true,
@@ -98,7 +102,7 @@ class StudentsCubit extends Cubit<StudentsState> {
     );
   }
 
-  void selectGrade(StudentGrade? grade) {
+  void selectGrade(GradeModel? grade) {
     emit(
       state.copyWith(
         gradeFilter: grade,

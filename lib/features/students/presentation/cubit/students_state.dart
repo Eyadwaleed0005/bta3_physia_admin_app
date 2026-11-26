@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../grades/data/models/grade_model.dart';
 import '../../data/models/student_model.dart';
 
 enum StudentsStatus { loading, success, empty, failure }
@@ -8,6 +9,7 @@ class StudentsState extends Equatable {
   const StudentsState({
     this.status = StudentsStatus.loading,
     this.students = const <StudentModel>[],
+    this.availableGrades = const <GradeModel>[],
     this.query = '',
     this.gradeFilter,
     this.visibleCount = pageSize,
@@ -15,13 +17,14 @@ class StudentsState extends Equatable {
     this.errorMessage,
   });
 
-  //to show only 4 students at a time
   static const int pageSize = 4;
 
   final StudentsStatus status;
   final List<StudentModel> students;
+
+  final List<GradeModel> availableGrades;
   final String query;
-  final StudentGrade? gradeFilter;
+  final GradeModel? gradeFilter;
   final int visibleCount;
   final bool isRefreshing;
   final String? errorMessage;
@@ -36,7 +39,7 @@ class StudentsState extends Equatable {
     return students
         .where((StudentModel student) {
           final bool matchesGrade =
-              gradeFilter == null || student.grade == gradeFilter;
+              gradeFilter == null || student.gradeId == gradeFilter!.id;
 
           if (!matchesGrade) return false;
 
@@ -68,7 +71,7 @@ class StudentsState extends Equatable {
 
   String get listTitle {
     if (hasSearch) return searchResultTitle;
-    if (gradeFilter != null) return gradeFilter!.label;
+    if (gradeFilter != null) return gradeFilter!.name;
 
     return 'قائمة الطلاب';
   }
@@ -76,8 +79,9 @@ class StudentsState extends Equatable {
   StudentsState copyWith({
     StudentsStatus? status,
     List<StudentModel>? students,
+    List<GradeModel>? availableGrades,
     String? query,
-    StudentGrade? gradeFilter,
+    GradeModel? gradeFilter,
     bool clearGradeFilter = false,
     int? visibleCount,
     bool? isRefreshing,
@@ -87,6 +91,7 @@ class StudentsState extends Equatable {
     return StudentsState(
       status: status ?? this.status,
       students: students ?? this.students,
+      availableGrades: availableGrades ?? this.availableGrades,
       query: query ?? this.query,
       gradeFilter: clearGradeFilter ? null : (gradeFilter ?? this.gradeFilter),
       visibleCount: visibleCount ?? this.visibleCount,
@@ -99,6 +104,7 @@ class StudentsState extends Equatable {
   List<Object?> get props => <Object?>[
     status,
     students,
+    availableGrades,
     query,
     gradeFilter,
     visibleCount,

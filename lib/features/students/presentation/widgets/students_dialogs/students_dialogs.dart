@@ -1,9 +1,11 @@
 import 'package:bta3_physia_admin/core/helper/spacer.dart';
 import 'package:bta3_physia_admin/core/style/app_color.dart';
 import 'package:bta3_physia_admin/core/style/textstyles.dart';
+import 'package:bta3_physia_admin/core/widgets/app_info_card.dart';
 import 'package:bta3_physia_admin/core/widgets/app_toast.dart';
 import 'package:bta3_physia_admin/core/widgets/custom_dialog.dart';
 import 'package:bta3_physia_admin/core/widgets/custom_text_form_field.dart';
+import 'package:bta3_physia_admin/features/grades/data/models/grade_model.dart';
 import 'package:bta3_physia_admin/features/students/data/models/student_model.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/student_details_cubit.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_details_widgets/student_action_tile.dart';
@@ -22,6 +24,10 @@ Future<void> showStudentGradeDialog(
     context: context,
     barrierColor: Colors.black.withValues(alpha: 0.55),
     builder: (BuildContext dialogContext) {
+      final List<GradeModel> alternativeGrades = cubit.state.availableGrades
+          .where((GradeModel grade) => grade.id != student.gradeId)
+          .toList(growable: false);
+
       return CustomDialog(
         title: 'تغيير الصف الدراسي',
         subtitle: 'راجع البيانات قبل المتابعة',
@@ -42,26 +48,36 @@ Future<void> showStudentGradeDialog(
             StudentActionTile(
               icon: Icons.school_outlined,
               title: 'الصف الحالي',
-              subtitle: student.grade.label,
+              subtitle: student.gradeLabel,
               isSelected: true,
               onTap: () {},
             ),
-            verticalSpace(10),
-            for (final StudentGrade grade in StudentGrade.values)
-              if (grade != student.grade) ...[
-                StudentActionTile(
-                  icon: Icons.school_outlined,
-                  title: grade.label,
-                  subtitle: 'اختيار الصف الجديد',
-                  onTap: () => _confirmGradeChange(
-                    dialogContext: dialogContext,
-                    cubit: cubit,
-                    student: student,
-                    grade: grade,
-                  ),
-                ),
-                verticalSpace(10),
-              ],
+            if (alternativeGrades.isNotEmpty) ...[
+              verticalSpace(10),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                itemCount: alternativeGrades.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final GradeModel grade = alternativeGrades[index];
+
+                  return StudentActionTile(
+                    icon: Icons.school_outlined,
+                    title: grade.name,
+                    subtitle: 'اختيار الصف الجديد',
+                    onTap: () => _confirmGradeChange(
+                      dialogContext: dialogContext,
+                      cubit: cubit,
+                      student: student,
+                      grade: grade,
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    verticalSpace(10),
+              ),
+            ],
           ],
         ),
       );
@@ -73,7 +89,7 @@ Future<void> _confirmGradeChange({
   required BuildContext dialogContext,
   required StudentDetailsCubit cubit,
   required StudentModel student,
-  required StudentGrade grade,
+  required GradeModel grade,
 }) async {
   final bool? confirmed = await CustomDialog.showConfirm(
     dialogContext,
@@ -98,12 +114,12 @@ Future<void> _confirmGradeChange({
         ),
         verticalSpace(4),
         Text(
-          grade.label,
+          grade.name,
           textAlign: TextAlign.center,
           style: AppTextStyle.font14TextSecondaryBoldTajawal(),
         ),
         verticalSpace(16),
-        const StudentsDialogInfoCard(
+        const AppInfoCard(
           text:
               'هيتغير المحتوى المتاح وسجل نتائج الصف الحالي. تفعيلات '
               'الصف القديم لا تمنح الوصول من الصف الجديد.',
@@ -113,7 +129,7 @@ Future<void> _confirmGradeChange({
   );
 
   if (confirmed == true && dialogContext.mounted) {
-    cubit.changeGrade(grade);
+    cubit.changeGrade(grade.id);
     showAppToast(dialogContext, message: 'تم حفظ إعدادات الطالب');
     Navigator.of(dialogContext).pop();
   }
@@ -189,7 +205,7 @@ class _StudentPasswordDialogState extends State<_StudentPasswordDialog> {
             style: AppTextStyle.font16TextLightBoldTajawal(),
           ),
           verticalSpace(16),
-          const StudentsDialogInfoCard(
+          const AppInfoCard(
             text: 'هيستخدم الطالب كلمة المرور الجديدة عند تسجيل الدخول.',
           ),
         ],
@@ -273,7 +289,7 @@ class _StudentPasswordDialogState extends State<_StudentPasswordDialog> {
             ),
           ],
           verticalSpace(16),
-          StudentsDialogInfoCard(
+          AppInfoCard(
             text: 'لن تظهر كلمة المرور الحالية. يتم تعيين كلمة مرور جديدة بعد التأكيد.',
           ),
         ],
@@ -306,7 +322,7 @@ Future<void> showAccountStatusDialog(
         verticalSpace(12),
         Text(student.name, style: AppTextStyle.font16TextLightBoldTajawal()),
         verticalSpace(16),
-        StudentsDialogInfoCard(
+        AppInfoCard(
           text: isPausing
               ? 'لن يتمكن الطالب من استخدام الحساب حتى تعيد تفعيله. '
                     'تفعيلات الكورسات ستظل محفوظة.'
@@ -349,7 +365,7 @@ Future<void> showLoginLinkDialog(
         verticalSpace(12),
         Text(student.name, style: AppTextStyle.font16TextLightBoldTajawal()),
         verticalSpace(16),
-        StudentsDialogInfoCard(
+        AppInfoCard(
           text: isLinked
               ? 'هيتمكن الطالب من تسجيل الدخول من جديد، واشتراكاته وبياناته لن تتغير.'
               : 'هيتم ربط تسجيل الدخول بحساب الطالب من جديد.',
@@ -392,7 +408,7 @@ Future<void> showDeleteStudentDialog(
         verticalSpace(8),
         Text(student.name, style: AppTextStyle.font18TextLightBoldTajawal()),
         verticalSpace(16),
-        const StudentsDialogInfoCard(
+        const AppInfoCard(
           text: 'سيحذف الطالب من الاداره و تلغي تفعيلات كورساته. لا يمكن التراجع عن هذا الأجراء.',
         ),
       ],
@@ -440,7 +456,7 @@ Future<void> showActivationCourseDialog(
           style: AppTextStyle.font14TextSecondaryBoldTajawal(),
         ),
         verticalSpace(16),
-        StudentsDialogInfoCard(
+        AppInfoCard(
           text: isActive
               ? 'هيتقفل محتوي هذا الكورس المدفوع للطالب. حساب الطالب هيفضل موجود'
               : 'هيقدر الطالب يفتح متحوي هذا الكورس المدفوع.',
@@ -454,30 +470,6 @@ Future<void> showActivationCourseDialog(
     showAppToast(
       context,
       message: isActive ? 'تم إلغاء تفعيل الكورس' : 'تم تفعيل الكورس',
-    );
-  }
-}
-
-class StudentsDialogInfoCard extends StatelessWidget {
-  const StudentsDialogInfoCard({super.key, required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
-      decoration: BoxDecoration(
-        color: ColorPalette.fieldFill,
-        borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: ColorPalette.fieldBorder, width: 1.w),
-      ),
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: AppTextStyle.font14TextMutedRegularTajawal(),
-      ),
     );
   }
 }

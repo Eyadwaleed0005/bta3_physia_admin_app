@@ -1,8 +1,8 @@
 import 'package:bta3_physia_admin/app/routes/screen_routes/route_names.dart';
 import 'package:bta3_physia_admin/core/helper/spacer.dart';
+import 'package:bta3_physia_admin/core/widgets/custom_screen_header.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/students_cubit.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/students_state.dart';
-import 'package:bta3_physia_admin/features/students/presentation/widgets/students_header.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_list_widgets/students_list_body.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_list_widgets/students_list_heading.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_list_widgets/students_search_row.dart';
@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class StudentsListView extends StatelessWidget {
-  const StudentsListView({super.key});
+class StudentsListScreenContent extends StatelessWidget {
+  const StudentsListScreenContent({super.key});
 
   static const double _bottomContentInset = 128;
 
@@ -25,7 +25,7 @@ class StudentsListView extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-              child: StudentsHeader(
+              child: CustomScreenHeader(
                 title: 'الطلاب',
                 subtitle: 'إدارة الطلاب والتفعيلات',
                 isRefreshing: state.isRefreshing,

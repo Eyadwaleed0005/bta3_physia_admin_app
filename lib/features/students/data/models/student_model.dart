@@ -1,18 +1,4 @@
-import 'package:bta3_physia_admin/core/helper/grade_name_helper.dart';
-
-enum StudentGrade {
-  firstSecondary,
-  secondSecondary,
-  thirdSecondary;
-
-  String get id => switch (this) {
-    StudentGrade.firstSecondary => 'secondary_1',
-    StudentGrade.secondSecondary => 'secondary_2',
-    StudentGrade.thirdSecondary => 'secondary_3',
-  };
-
-  String get label => GradeNameHelper.getGradeName(id);
-}
+import 'package:bta3_physia_admin/features/grades/data/models/dummy_grades_data.dart';
 
 class StudentCourseModel {
   const StudentCourseModel({
@@ -54,7 +40,7 @@ class StudentModel {
     required this.id,
     required this.name,
     required this.email,
-    required this.grade,
+    required this.gradeId,
     this.isActive = true,
     this.isLoginLinked = true,
     this.courses = const <StudentCourseModel>[],
@@ -64,18 +50,22 @@ class StudentModel {
   final String id;
   final String name;
   final String email;
-  final StudentGrade grade;
+
+  /// Grade id shared with the grades feature (see `DummyGradesData`).
+  final String gradeId;
   final bool isActive;
   final bool isLoginLinked;
   final List<StudentCourseModel> courses;
   final List<StudentExamResultModel> results;
+
+  String get gradeLabel => DummyGradesData.nameOf(gradeId);
 
   String get statusLabel => isActive ? 'نشط' : 'موقوف';
 
   StudentModel copyWith({
     String? name,
     String? email,
-    StudentGrade? grade,
+    String? gradeId,
     bool? isActive,
     bool? isLoginLinked,
     List<StudentCourseModel>? courses,
@@ -85,7 +75,7 @@ class StudentModel {
       id: id,
       name: name ?? this.name,
       email: email ?? this.email,
-      grade: grade ?? this.grade,
+      gradeId: gradeId ?? this.gradeId,
       isActive: isActive ?? this.isActive,
       isLoginLinked: isLoginLinked ?? this.isLoginLinked,
       courses: courses ?? this.courses,

@@ -4,6 +4,7 @@ import 'package:bta3_physia_admin/features/home/presentation/cubit/home_cubit.da
 import 'package:bta3_physia_admin/features/home/presentation/screens/home_screen.dart';
 import 'package:bta3_physia_admin/features/main_navigation/presentation/cubit/bottom_navigation_cubit.dart';
 import 'package:bta3_physia_admin/features/main_navigation/presentation/widgets/custom_bottom_nav_bar.dart';
+import 'package:bta3_physia_admin/features/more/presentation/screens/more_screen.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/students_cubit.dart';
 import 'package:bta3_physia_admin/features/students/presentation/screens/students_screen.dart';
 import 'package:flutter/material.dart';
@@ -76,23 +77,20 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           child: const StudentsScreen(),
         );
 
-      case MainNavigationTabs.live:
+      case MainNavigationTabs.courses:
         return BlocProvider(
           create: (context) => getIt<HomeCubit>(),
           child: const HomeScreen(),
         );
 
-      case MainNavigationTabs.results:
+      case MainNavigationTabs.exams:
         return BlocProvider(
           create: (context) => getIt<HomeCubit>(),
           child: const HomeScreen(),
         );
 
-      case MainNavigationTabs.profile:
-        return BlocProvider(
-          create: (context) => getIt<HomeCubit>(),
-          child: const HomeScreen(),
-        );
+      case MainNavigationTabs.more:
+        return const MoreScreen();
 
       default:
         return BlocProvider(
@@ -108,11 +106,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         return 'screen_$currentIndex';
       case MainNavigationTabs.students:
         return 'screen_$currentIndex';
-      case MainNavigationTabs.live:
+      case MainNavigationTabs.courses:
         return 'screen_$currentIndex';
-      case MainNavigationTabs.results:
+      case MainNavigationTabs.exams:
         return 'screen_$currentIndex';
-      case MainNavigationTabs.profile:
+      case MainNavigationTabs.more:
         return 'screen_$currentIndex';
       default:
         return 'screen_$currentIndex';
