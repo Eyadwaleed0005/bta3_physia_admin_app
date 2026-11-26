@@ -5,7 +5,7 @@ import 'package:bta3_physia_admin/core/style/textstyles.dart';
 import 'package:bta3_physia_admin/core/widgets/custom_button.dart';
 import 'package:bta3_physia_admin/features/students/data/models/student_model.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/student_details_cubit.dart';
-import 'package:bta3_physia_admin/features/students/presentation/widgets/students_details_widgets/student_action_tile.dart';
+import 'package:bta3_physia_admin/core/widgets/app_action_tile.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_details_widgets/student_profile_card.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_dialogs/students_dialogs.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class StudentsDetailsBody extends StatelessWidget {
           textStyle: AppTextStyle.font15TextPrimaryBoldTajawal(),
         ),
         verticalSpace(16),
-        StudentActionTile(
+        AppActionTile(
           icon: Icons.bar_chart_rounded,
           title: 'سجل النتائج',
           subtitle: 'نتائج امتحانات الصف الحالي',
@@ -58,21 +58,21 @@ class StudentsDetailsBody extends StatelessWidget {
           textStyle: AppTextStyle.font18TextPrimaryBoldTajawal(),
         ),
         verticalSpace(10),
-        StudentActionTile(
+        AppActionTile(
           icon: Icons.school_outlined,
           title: 'تغيير الصف الدراسي',
           subtitle: 'تحديث الصف والمحتوى المتاح',
           onTap: () => showStudentGradeDialog(context, student),
         ),
         verticalSpace(10),
-        StudentActionTile(
+        AppActionTile(
           icon: Icons.lock_outline_rounded,
           title: 'تغيير كلمة المرور',
           subtitle: 'تعيين كلمة مرور جديدة للحساب',
           onTap: () => showStudentPasswordDialog(context, student),
         ),
         verticalSpace(10),
-        StudentActionTile(
+        AppActionTile(
           icon: student.isActive
               ? Icons.pause_circle_outline_rounded
               : Icons.play_circle_outline_rounded,
@@ -83,7 +83,7 @@ class StudentsDetailsBody extends StatelessWidget {
           onTap: () => showAccountStatusDialog(context, student),
         ),
         verticalSpace(10),
-        StudentActionTile(
+        AppActionTile(
           icon: student.isLoginLinked
               ? Icons.link_off_rounded
               : Icons.link_rounded,

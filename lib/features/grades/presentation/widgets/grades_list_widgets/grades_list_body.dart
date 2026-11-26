@@ -1,4 +1,5 @@
 import 'package:bta3_physia_admin/core/helper/spacer.dart';
+import 'package:bta3_physia_admin/core/style/app_color.dart';
 import 'package:bta3_physia_admin/core/style/textstyles.dart';
 import 'package:bta3_physia_admin/core/widgets/app_info_card.dart';
 import 'package:bta3_physia_admin/features/grades/data/models/grade_model.dart';
@@ -59,6 +60,8 @@ class GradesListBody extends StatelessWidget {
             ),
             verticalSpace(12),
             AppInfoCard(
+              color: ColorPalette.panelGlass,
+
               title: 'قائمة واحدة في التطبيقين',
               text:
                   'تستخدم الصفوف نفسها في التسجيل والفلترة والكورسات '

@@ -11,14 +11,14 @@ class AppInfoCard extends StatelessWidget {
     required this.text,
     this.titleStyle,
     this.textStyle,
-    this.textAlign = TextAlign.center,
+    this.color,
   });
 
   final String? title;
   final String text;
   final TextStyle? titleStyle;
   final TextStyle? textStyle;
-  final TextAlign textAlign;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +26,17 @@ class AppInfoCard extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
       decoration: BoxDecoration(
-        color: ColorPalette.panelGlass,
+        color: color ?? ColorPalette.fieldFill,
+        border: Border.all(color: ColorPalette.border),
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           if (title != null && title!.trim().isNotEmpty) ...[
             Text(
               title!,
-              textAlign: TextAlign.center,
               style:
                   titleStyle ?? AppTextStyle.font14TextSecondaryBoldTajawal(),
             ),
@@ -43,7 +44,6 @@ class AppInfoCard extends StatelessWidget {
           ],
           Text(
             text,
-            textAlign: textAlign,
             style: textStyle ?? AppTextStyle.font14TextMutedRegularTajawal(),
           ),
         ],

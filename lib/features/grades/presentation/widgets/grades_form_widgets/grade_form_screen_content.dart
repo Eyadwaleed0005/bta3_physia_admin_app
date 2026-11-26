@@ -132,6 +132,8 @@ class _GradeFormScreenContentState extends State<GradeFormScreenContent> {
                     ),
                     verticalSpace(16),
                     const AppInfoCard(
+                      color: ColorPalette.panelGlass,
+
                       title: 'تعديل الاسم يحفظ العلاقات',
                       text:
                           'الطلاب والكورسات تظل مرتبطة بالصف نفسه عند تغيير '

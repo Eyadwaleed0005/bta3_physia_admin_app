@@ -3,7 +3,7 @@ import 'package:bta3_physia_admin/core/style/textstyles.dart';
 import 'package:bta3_physia_admin/core/widgets/custom_screen_header.dart';
 import 'package:bta3_physia_admin/features/grades/data/models/grade_model.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/students_cubit.dart';
-import 'package:bta3_physia_admin/features/students/presentation/widgets/students_details_widgets/student_action_tile.dart';
+import 'package:bta3_physia_admin/core/widgets/app_action_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -47,7 +47,7 @@ class StudentsGradeFilterScreenContent extends StatelessWidget {
                   itemCount: grades.length + 1,
                   itemBuilder: (BuildContext context, int index) {
                     if (index == 0) {
-                      return StudentActionTile(
+                      return AppActionTile(
                         icon: Icons.school_outlined,
                         title: 'كل الصفوف',
                         subtitle: 'عرض جميع الطلاب',
@@ -61,7 +61,7 @@ class StudentsGradeFilterScreenContent extends StatelessWidget {
 
                     final GradeModel grade = grades[index - 1];
 
-                    return StudentActionTile(
+                    return AppActionTile(
                       icon: Icons.school_outlined,
                       title: grade.name,
                       subtitle: 'عرض طلاب هذا الصف',

@@ -4,8 +4,8 @@ import 'package:bta3_physia_admin/core/style/textstyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class StudentActionTile extends StatelessWidget {
-  const StudentActionTile({
+class AppActionTile extends StatelessWidget {
+  const AppActionTile({
     super.key,
     required this.title,
     required this.onTap,
@@ -13,6 +13,7 @@ class StudentActionTile extends StatelessWidget {
     this.icon,
     this.titleColor,
     this.isSelected = false,
+    this.showBorder = false,
   });
 
   final String title;
@@ -20,6 +21,7 @@ class StudentActionTile extends StatelessWidget {
   final IconData? icon;
   final Color? titleColor;
   final bool isSelected;
+  final bool showBorder;
   final VoidCallback onTap;
 
   @override
@@ -38,7 +40,15 @@ class StudentActionTile extends StatelessWidget {
         child: Container(
           constraints: BoxConstraints(minHeight: 60.h),
           padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
-
+          decoration: showBorder
+              ? BoxDecoration(
+                  borderRadius: radius,
+                  border: Border.all(
+                    color: ColorPalette.fieldBorder,
+                    width: 1.w,
+                  ),
+                )
+              : null,
           child: Row(
             children: [
               if (icon != null) ...[

@@ -8,7 +8,7 @@ import 'package:bta3_physia_admin/core/widgets/custom_text_form_field.dart';
 import 'package:bta3_physia_admin/features/grades/data/models/grade_model.dart';
 import 'package:bta3_physia_admin/features/students/data/models/student_model.dart';
 import 'package:bta3_physia_admin/features/students/presentation/cubit/student_details_cubit.dart';
-import 'package:bta3_physia_admin/features/students/presentation/widgets/students_details_widgets/student_action_tile.dart';
+import 'package:bta3_physia_admin/core/widgets/app_action_tile.dart';
 import 'package:bta3_physia_admin/features/students/presentation/widgets/students_details_widgets/student_profile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +45,7 @@ Future<void> showStudentGradeDialog(
               style: AppTextStyle.font16TextLightBoldTajawal(),
             ),
             verticalSpace(12),
-            StudentActionTile(
+            AppActionTile(
               icon: Icons.school_outlined,
               title: 'الصف الحالي',
               subtitle: student.gradeLabel,
@@ -62,7 +62,7 @@ Future<void> showStudentGradeDialog(
                 itemBuilder: (BuildContext context, int index) {
                   final GradeModel grade = alternativeGrades[index];
 
-                  return StudentActionTile(
+                  return AppActionTile(
                     icon: Icons.school_outlined,
                     title: grade.name,
                     subtitle: 'اختيار الصف الجديد',

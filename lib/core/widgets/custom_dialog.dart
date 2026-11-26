@@ -18,10 +18,12 @@ class CustomDialog extends StatelessWidget {
     this.type = CustomDialogType.confirm,
     this.primaryButtonText,
     this.secondaryButtonText = 'إلغاء',
+    this.tertiaryButtonText,
     this.showPrimaryButton = true,
     this.showSecondaryButton,
     this.onPrimaryPressed,
     this.onSecondaryPressed,
+    this.onTertiaryPressed,
     this.onClose,
     this.primaryButtonColor,
     this.primaryButtonTextColor,
@@ -37,12 +39,14 @@ class CustomDialog extends StatelessWidget {
 
   final String? primaryButtonText;
   final String secondaryButtonText;
+  final String? tertiaryButtonText;
 
   final bool showPrimaryButton;
   final bool? showSecondaryButton;
 
   final VoidCallback? onPrimaryPressed;
   final VoidCallback? onSecondaryPressed;
+  final VoidCallback? onTertiaryPressed;
   final VoidCallback? onClose;
 
   final Color? primaryButtonColor;
@@ -233,6 +237,7 @@ class CustomDialog extends StatelessWidget {
               ],
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 _DialogHeader(
@@ -252,7 +257,6 @@ class CustomDialog extends StatelessWidget {
                           if (message != null)
                             Text(
                               message!,
-                              textAlign: TextAlign.center,
                               style:
                                   AppTextStyle.font14TextMutedRegularTajawal(),
                             ),
@@ -282,6 +286,21 @@ class CustomDialog extends StatelessWidget {
                     text: secondaryButtonText,
                     onPressed:
                         onSecondaryPressed ?? () => Navigator.of(context).pop(),
+                    height: 50.h,
+                    backgroundColor: Colors.transparent,
+                    borderColor: ColorPalette.fieldBorder,
+                    borderWidth: 1,
+                    borderRadius: 24.r,
+                    foregroundColor: ColorPalette.textLight,
+                    textStyle: AppTextStyle.font15TextLightBoldTajawal(),
+                  ),
+                ],
+                if (tertiaryButtonText != null) ...[
+                  verticalSpace(10),
+                  CustomSecondaryButton(
+                    text: tertiaryButtonText!,
+                    onPressed:
+                        onTertiaryPressed ?? () => Navigator.of(context).pop(),
                     height: 50.h,
                     backgroundColor: Colors.transparent,
                     borderColor: ColorPalette.fieldBorder,

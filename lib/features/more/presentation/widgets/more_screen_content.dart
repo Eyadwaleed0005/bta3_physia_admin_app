@@ -1,6 +1,7 @@
 import 'package:bta3_physia_admin/app/routes/screen_routes/route_names.dart';
 import 'package:bta3_physia_admin/core/constant/main_navigation_tabs.dart';
 import 'package:bta3_physia_admin/core/helper/spacer.dart';
+import 'package:bta3_physia_admin/core/style/app_color.dart';
 import 'package:bta3_physia_admin/core/style/textstyles.dart';
 import 'package:bta3_physia_admin/core/widgets/app_info_card.dart';
 import 'package:bta3_physia_admin/core/widgets/custom_screen_header.dart';
@@ -56,13 +57,15 @@ class MoreScreenContent extends StatelessWidget {
                       Navigator.of(context).pushNamed(RouteNames.gradesScreen),
                 ),
                 verticalSpace(12),
-                const MoreActionCard(
+                MoreActionCard(
                   icon: Icons.live_tv_rounded,
                   title: 'البث المباشر',
                   subtitle: 'بث واحد للمشهد المحدد وإلغاؤه يدوياً',
+                  onTap: () => _openLive(context),
                 ),
                 verticalSpace(16),
                 AppInfoCard(
+                  color: ColorPalette.panelGlass,
                   title: 'الإشعارات تلقائية',
                   text: 'تصل إشعارات النشر لطلاب الصف المسموح لهم بالمحتوى.',
                   titleStyle: AppTextStyle.font16TextSecondaryBoldTajawal(),
@@ -73,5 +76,9 @@ class MoreScreenContent extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _openLive(BuildContext context) {
+    Navigator.of(context).pushNamed(RouteNames.liveScreen);
   }
 }

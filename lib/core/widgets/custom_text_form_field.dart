@@ -32,6 +32,7 @@ class CustomTextFormField extends StatefulWidget {
     this.minLines,
     this.maxLength,
     this.textDirection = TextDirection.rtl,
+    this.textAlign = TextAlign.right,
     this.autofillHints,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.prefixIcon,
@@ -80,6 +81,7 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxLength;
 
   final TextDirection textDirection;
+  final TextAlign textAlign;
 
   final Iterable<String>? autofillHints;
 
@@ -262,7 +264,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           maxLines: widget.maxLines,
           minLines: widget.minLines,
           maxLength: widget.maxLength,
-          textAlign: TextAlign.right,
+          textAlign: widget.textAlign,
           textDirection: widget.textDirection,
           cursorColor: widget.cursorColor ?? ColorPalette.primary,
           autofillHints: widget.autofillHints,
@@ -297,10 +299,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               maxWidth: 56.w,
               maxHeight: 56.h,
             ),
-            hintText: widget.hintText,
-            hintStyle:
-                widget.hintStyle ??
-                AppTextStyle.font13TextSecondaryRegularTajawal(),
+            hint: Text(
+              widget.hintText,
+              textDirection: widget.textDirection,
+              textAlign: widget.textAlign,
+              style:
+                  widget.hintStyle ??
+                  AppTextStyle.font13TextSecondaryRegularTajawal(),
+            ),
             errorText: widget.errorText,
             filled: true,
             fillColor: widget.fillColor ?? ColorPalette.surface,

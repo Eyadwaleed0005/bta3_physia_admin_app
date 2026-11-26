@@ -1,6 +1,7 @@
 import 'package:bta3_physia_admin/app/routes/screen_routes/feature/app_startup_routes.dart';
 import 'package:bta3_physia_admin/app/routes/screen_routes/feature/grades_routes.dart';
 import 'package:bta3_physia_admin/app/routes/screen_routes/feature/home_routes.dart';
+import 'package:bta3_physia_admin/app/routes/screen_routes/feature/live_routes.dart';
 import 'package:bta3_physia_admin/app/routes/screen_routes/feature/main_navigation.dart';
 import 'package:bta3_physia_admin/app/routes/screen_routes/feature/students_routes.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ abstract final class AppRoutes {
         HomeRoutes.generateRoute(settings) ??
         StudentsRoutes.generateRoute(settings) ??
         GradesRoutes.generateRoute(settings) ??
+        LiveRoutes.generateRoute(settings) ??
         _buildUnknownRoute(settings);
   }
 
